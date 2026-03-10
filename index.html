@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="styles.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Platform A.L.A.G.A. - Mandaue City Health Services</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="styles.css">
     <style>
-        .hidden { display: none; }
+        /* Local overrides — main styles live in styles.css */
         .sms-preview {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border-radius: 20px;
@@ -23,1540 +23,833 @@
             border-radius: 18px;
             margin: 8px 0;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-slide-in {
-            animation: slideIn 0.3s ease-out;
+            word-break: break-word;
         }
     </style>
 </head>
 
 <body class="bg-gradient-to-br from-blue-50 to-green-50">
-    <!-- Landing Page -->
-    <div id="landingPage">
-        <header class="bg-white shadow-md">
-            <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-                <div class="flex items-center gap-3">
-                    <div class="bg-gradient-to-br from-blue-600 to-green-600 p-2 rounded-lg">
-                        <svg class="text-white" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                        </svg>
-                    </div>
-                    <div>
-                        <h1 class="text-2xl font-bold text-gray-800">Platform A.L.A.G.A.</h1>
-                        <p class="text-sm text-gray-600">Mandaue City Health Services</p>
-                    </div>
+
+<!-- ═══════════════════════════════════════════════
+     LANDING PAGE
+════════════════════════════════════════════════ -->
+<div id="landingPage">
+    <header class="bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="bg-gradient-to-br from-blue-600 to-green-600 p-2 rounded-lg">
+                    <svg class="text-white" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-2xl font-bold text-gray-800">Platform A.L.A.G.A.</h1>
+                    <p class="text-sm text-gray-600">Mandaue City Health Services</p>
                 </div>
             </div>
-        </header>
+        </div>
+    </header>
 
-        <section class="max-w-7xl mx-auto px-4 py-16">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
-                    Real-Time Health Updates,<br>Right to Your Phone
-                </h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
-                    Stay informed about vaccination schedules, free medicine distribution, and health programs in your barangay—whether online or offline.
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <button onclick="showResidentRegistration()" class="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:shadow-lg transition">
-                        Register as Resident
-                    </button>
-                    <button onclick="showLogin()" class="bg-gradient-to-r from-green-600 to-green-700 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:shadow-lg transition">
-                        Health Worker Login
-                    </button>
-                    <button onclick="showResidentLogin()" class="bg-blue-500 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:shadow-lg transition">
-Resident Login
-</button>
+    <section class="max-w-7xl mx-auto px-4 py-16">
+        <div class="text-center mb-12">
+            <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+                Real-Time Health Updates,<br>Right to Your Phone
+            </h2>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+                Stay informed about vaccination schedules, free medicine distribution, and health programs in your barangay—whether online or offline.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button onclick="showResidentRegistration()" class="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:shadow-lg transition">
+                    Register as Resident
+                </button>
+                <button onclick="showLogin()" class="bg-gradient-to-r from-green-600 to-green-700 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:shadow-lg transition">
+                    Health Worker Login
+                </button>
+                <button onclick="showResidentLogin()" class="bg-blue-500 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:shadow-lg transition">
+                    Resident Login
+                </button>
+            </div>
+        </div>
+
+        <!-- Feature Cards -->
+        <div class="grid md:grid-cols-3 gap-8 mt-16">
+            <div class="bg-white p-6 rounded-xl shadow-lg">
+                <div class="bg-blue-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                    <svg class="text-blue-600" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold mb-2">SMS Alerts</h3>
+                <p class="text-gray-600">Receive health updates via SMS, even without internet connection.</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-lg">
+                <div class="bg-green-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                    <svg class="text-green-600" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                        <circle cx="12" cy="10" r="3"/>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold mb-2">Location-Based</h3>
+                <p class="text-gray-600">Get notifications only for programs in your barangay.</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-lg">
+                <div class="bg-purple-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                    <svg class="text-purple-600" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold mb-2">Secure &amp; Private</h3>
+                <p class="text-gray-600">OTP-based authentication protects your personal information.</p>
+            </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="grid md:grid-cols-4 gap-6 mt-16">
+            <div class="bg-white p-6 rounded-lg shadow text-center">
+                <div class="text-3xl font-bold text-blue-600">26</div>
+                <div class="text-gray-600">Barangays</div>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow text-center">
+                <div class="text-3xl font-bold text-green-600" id="residentCount">2</div>
+                <div class="text-gray-600">Registered Residents</div>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow text-center">
+                <div class="text-3xl font-bold text-purple-600" id="scheduleCount">2</div>
+                <div class="text-gray-600">Active Programs</div>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow text-center">
+                <div class="text-3xl font-bold text-orange-600" id="notificationCount">1</div>
+                <div class="text-gray-600">Notifications Sent</div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════
+     HEALTH WORKER LOGIN MODAL
+════════════════════════════════════════════════ -->
+<div id="loginModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+    <div class="bg-white rounded-xl p-8 max-w-md w-full">
+        <div class="flex justify-between items-center mb-6">
+            <h3 class="text-2xl font-bold">Health Worker Login</h3>
+            <button onclick="closeLogin()" class="text-gray-500 hover:text-gray-700 transition">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"/>
+                    <line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Step 1: Phone + Password -->
+        <div id="loginForm">
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium mb-2">Phone Number</label>
+                    <input type="tel" id="loginPhone" placeholder="09171234567"
+                           class="w-full border rounded-lg px-4 py-2">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-2">Password</label>
+                    <input type="password" id="loginPassword" placeholder="Enter password"
+                           class="w-full border rounded-lg px-4 py-2">
+                </div>
+                <button id="sendOtpBtn" onclick="sendOTP()"
+                        class="w-full bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition">
+                    Send OTP
+                </button>
+            </div>
+        </div>
+
+        <!-- Step 2: OTP Verification -->
+        <div id="otpForm" class="hidden">
+            <div class="space-y-4">
+                <p class="text-sm text-gray-600">An OTP has been sent to your phone.</p>
+                <p class="text-xs text-blue-600">Demo OTP: 123456</p>
+                <div>
+                    <label class="block text-sm font-medium mb-2">Enter OTP</label>
+                    <input type="text" id="otpCode" placeholder="123456" maxlength="6"
+                           class="w-full border rounded-lg px-4 py-2 text-center text-2xl tracking-widest">
+                </div>
+                <button id="verifyOtpBtn" onclick="verifyOTP()"
+                        class="w-full bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition">
+                    Verify &amp; Login
+                </button>
+                <button onclick="backToLogin()" class="w-full text-gray-600 py-2 hover:text-gray-800 transition">
+                    ← Back
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════
+     RESIDENT REGISTRATION
+════════════════════════════════════════════════ -->
+<div id="residentRegistration" class="hidden min-h-screen bg-gradient-to-br from-blue-50 to-green-50 p-4">
+    <div class="max-w-2xl mx-auto mt-8">
+        <div class="bg-white rounded-xl shadow-lg p-8">
+            <button onclick="backToHome()" class="text-gray-600 mb-4 flex items-center gap-2 hover:text-gray-800 transition">
+                ← Back
+            </button>
+            <h2 class="text-3xl font-bold mb-6">Resident Registration</h2>
+            <p class="text-gray-600 mb-6">
+                Register to receive SMS notifications about health programs, vaccinations, and medicine distribution in your barangay.
+            </p>
+
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium mb-2">Full Name <span class="text-red-500">*</span></label>
+                    <input type="text" id="residentName" placeholder="Juan Dela Cruz"
+                           class="w-full border rounded-lg px-4 py-2">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium mb-2">Phone Number <span class="text-red-500">*</span></label>
+                    <input type="tel" id="residentPhone" placeholder="09171234567"
+                           class="w-full border rounded-lg px-4 py-2">
+                    <p class="text-xs text-gray-500 mt-1">You will receive SMS notifications on this number.</p>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium mb-2">Password <span class="text-red-500">*</span></label>
+                    <input type="password" id="residentPassword" placeholder="Create a password (min. 6 characters)"
+                           class="w-full border rounded-lg px-4 py-2">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium mb-2">Barangay <span class="text-red-500">*</span></label>
+                    <select id="residentBarangay" class="w-full border rounded-lg px-4 py-2">
+                        <option value="">Select Barangay</option>
+                        <option value="Alang-alang">Alang-alang</option>
+                        <option value="Bakilid">Bakilid</option>
+                        <option value="Banilad">Banilad</option>
+                        <option value="Basak">Basak</option>
+                        <option value="Cabancalan">Cabancalan</option>
+                        <option value="Cambaro">Cambaro</option>
+                        <option value="Canduman">Canduman</option>
+                        <option value="Casili">Casili</option>
+                        <option value="Casuntingan">Casuntingan</option>
+                        <option value="Centro">Centro</option>
+                        <option value="Cubacub">Cubacub</option>
+                        <option value="Guizo">Guizo</option>
+                        <option value="Ibabao-Estancia">Ibabao-Estancia</option>
+                        <option value="Jagobiao">Jagobiao</option>
+                        <option value="Labogon">Labogon</option>
+                        <option value="Looc">Looc</option>
+                        <option value="Maguikay">Maguikay</option>
+                        <option value="Mantuyong">Mantuyong</option>
+                        <option value="Opao">Opao</option>
+                        <option value="Paknaan">Paknaan</option>
+                        <option value="Pagsabungan">Pagsabungan</option>
+                        <option value="Subangdaku">Subangdaku</option>
+                        <option value="Tabok">Tabok</option>
+                        <option value="Tawason">Tawason</option>
+                        <option value="Tingub">Tingub</option>
+                        <option value="Tipolo">Tipolo</option>
+                        <option value="Umapad">Umapad</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium mb-2">Address</label>
+                    <textarea id="residentAddress" placeholder="Complete address"
+                              class="w-full border rounded-lg px-4 py-2" rows="3"></textarea>
+                </div>
+
+                <div class="bg-blue-50 p-4 rounded-lg">
+                    <p class="text-sm text-blue-800">🛡️ Your data is protected under RA 10173 (Data Privacy Act)</p>
+                </div>
+
+                <button id="registerBtn" onclick="registerResident()"
+                        class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
+                    Register Now
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════
+     RESIDENT LOGIN
+════════════════════════════════════════════════ -->
+<div id="residentLogin" class="hidden min-h-screen bg-gradient-to-br from-blue-50 to-green-50 flex items-center justify-center p-6">
+    <div class="max-w-md w-full bg-white p-8 rounded-xl shadow-lg">
+        <div class="flex items-center gap-3 mb-6">
+            <div class="bg-gradient-to-br from-blue-600 to-green-600 p-2 rounded-lg">
+                <svg class="text-white" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+            </div>
+            <div>
+                <h2 class="text-2xl font-bold">Resident Login</h2>
+                <p class="text-sm text-gray-500">Platform A.L.A.G.A.</p>
+            </div>
+        </div>
+
+        <div class="space-y-4">
+            <div>
+                <label class="block text-sm font-medium mb-2">Phone Number</label>
+                <input type="tel" id="loginResidentPhone" placeholder="09171234567"
+                       class="w-full border rounded-lg px-4 py-2">
+            </div>
+            <div>
+                <label class="block text-sm font-medium mb-2">Password</label>
+                <input type="password" id="loginResidentPassword" placeholder="Enter your password"
+                       class="w-full border rounded-lg px-4 py-2">
+            </div>
+            <button id="loginResidentBtn" onclick="loginResident()"
+                    class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
+                Login
+            </button>
+            <button onclick="backToHome()"
+                    class="w-full text-gray-600 py-2 hover:text-gray-800 transition">
+                ← Back to Home
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════
+     RESIDENT DASHBOARD
+════════════════════════════════════════════════ -->
+<div id="residentDashboard" class="hidden min-h-screen bg-gradient-to-br from-blue-50 to-green-50">
+    <header class="bg-white shadow-md p-4 flex justify-between items-center">
+        <div>
+            <h2 class="text-xl font-bold">Resident Dashboard</h2>
+            <p class="text-sm text-gray-600">
+                <span id="residentNameLabel"></span> — Barangay <span id="residentBarangayLabel"></span>
+            </p>
+        </div>
+        <button onclick="logoutResident()" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition">
+            Logout
+        </button>
+    </header>
+
+    <div class="max-w-5xl mx-auto p-6 space-y-6">
+
+        <!-- Stats -->
+        <div class="grid md:grid-cols-4 gap-4">
+            <div class="bg-white p-4 rounded-lg shadow text-center">
+                <div class="text-2xl font-bold text-blue-600" id="statResidents">0</div>
+                <div class="text-sm text-gray-600">Residents</div>
+            </div>
+            <div class="bg-white p-4 rounded-lg shadow text-center">
+                <div class="text-2xl font-bold text-green-600" id="statPrograms">0</div>
+                <div class="text-sm text-gray-600">Programs</div>
+            </div>
+            <div class="bg-white p-4 rounded-lg shadow text-center">
+                <div class="text-2xl font-bold text-purple-600" id="statAlerts">0</div>
+                <div class="text-sm text-gray-600">Alerts</div>
+            </div>
+            <div class="bg-white p-4 rounded-lg shadow text-center">
+                <div class="text-2xl font-bold text-orange-600">26</div>
+                <div class="text-sm text-gray-600">Barangays</div>
+            </div>
+        </div>
+
+        <!-- Announcements -->
+        <div class="bg-white p-6 rounded-lg shadow">
+            <h3 class="text-xl font-bold mb-4">📢 Health Announcements</h3>
+            <div id="residentAnnouncements" class="space-y-4">
+                <p class="text-gray-400 text-sm">Loading…</p>
+            </div>
+        </div>
+
+        <!-- Upcoming Programs -->
+        <div class="bg-white p-6 rounded-lg shadow">
+            <h3 class="text-xl font-bold mb-4">📅 Upcoming Health Programs</h3>
+            <div id="residentPrograms" class="space-y-3">
+                <p class="text-gray-400 text-sm">Loading…</p>
+            </div>
+        </div>
+
+        <!-- Notifications -->
+        <div class="bg-white p-6 rounded-lg shadow">
+            <h3 class="text-xl font-bold mb-4">🔔 Your Notifications</h3>
+            <div id="residentNotifications" class="space-y-3">
+                <p class="text-gray-400 text-sm">Loading…</p>
+            </div>
+        </div>
+
+        <!-- Health Supplies -->
+        <div class="bg-white p-6 rounded-lg shadow">
+            <h3 class="text-xl font-bold mb-4">💊 Available Health Supplies</h3>
+            <div id="residentSupplies" class="space-y-2">
+                <p class="text-gray-400 text-sm">Loading…</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════
+     HEALTH WORKER DASHBOARD
+════════════════════════════════════════════════ -->
+<div id="dashboard" class="hidden min-h-screen bg-gray-50">
+
+    <header class="bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="bg-gradient-to-br from-blue-600 to-green-600 p-2 rounded-lg">
+                    <svg class="text-white" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold text-gray-800">Platform A.L.A.G.A.</h1>
+                    <p class="text-xs text-gray-600">Health Worker Dashboard</p>
                 </div>
             </div>
+            <button onclick="logout()" class="text-red-600 hover:text-red-700 px-4 py-2 transition">Logout</button>
+        </div>
+    </header>
 
-            <div class="grid md:grid-cols-3 gap-8 mt-16">
-                <div class="bg-white p-6 rounded-xl shadow-lg">
-                    <div class="bg-blue-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+    <!-- Tab Navigation -->
+    <div class="bg-white border-b">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex gap-1 overflow-x-auto">
+                <button onclick="showTab('overview')"     id="tabOverview"       class="px-4 py-3 font-medium whitespace-nowrap border-b-2 border-blue-600 text-blue-600">Dashboard</button>
+                <button onclick="showTab('schedules')"    id="tabSchedules"      class="px-4 py-3 font-medium whitespace-nowrap text-gray-600">Schedules</button>
+                <button onclick="showTab('residents')"    id="tabResidents"      class="px-4 py-3 font-medium whitespace-nowrap text-gray-600">Residents</button>
+                <button onclick="showTab('notifications')" id="tabNotifications" class="px-4 py-3 font-medium whitespace-nowrap text-gray-600">Notifications</button>
+                <button onclick="showTab('sms')"          id="tabSms"            class="px-4 py-3 font-medium whitespace-nowrap text-gray-600">Send SMS</button>
+                <button onclick="showTab('supplies')"     id="tabSupplies"       class="px-4 py-3 font-medium whitespace-nowrap text-gray-600">Medicine Stocks</button>
+                <button onclick="showTab('add')"          id="tabAdd"            class="px-4 py-3 font-medium whitespace-nowrap text-gray-600">Add Schedule</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tab Content -->
+    <div class="max-w-7xl mx-auto px-4 py-6">
+
+        <!-- ── Overview Tab ── -->
+        <div id="overviewTab">
+            <h2 class="text-2xl font-bold mb-6">Dashboard Overview</h2>
+
+            <!-- Dashboard Cards -->
+            <div class="grid md:grid-cols-4 gap-4 mb-8">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <div class="flex items-center gap-3 mb-2">
                         <svg class="text-blue-600" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
-                            <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                            <line x1="16" y1="2" x2="16" y2="6"/>
+                            <line x1="8" y1="2" x2="8" y2="6"/>
+                            <line x1="3" y1="10" x2="21" y2="10"/>
                         </svg>
+                        <div class="text-2xl font-bold" id="dashScheduleCount">2</div>
                     </div>
-                    <h3 class="text-xl font-bold mb-2">SMS Alerts</h3>
-                    <p class="text-gray-600">Receive health updates via SMS, even without internet connection.</p>
+                    <div class="text-sm text-gray-600">Active Schedules</div>
                 </div>
-                <div class="bg-white p-6 rounded-xl shadow-lg">
-                    <div class="bg-green-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <div class="flex items-center gap-3 mb-2">
                         <svg class="text-green-600" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                        <div class="text-2xl font-bold" id="dashResidentCount">2</div>
+                    </div>
+                    <div class="text-sm text-gray-600">Registered Residents</div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <div class="flex items-center gap-3 mb-2">
+                        <svg class="text-purple-600" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="22" y1="2" x2="11" y2="13"/>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                        </svg>
+                        <div class="text-2xl font-bold" id="dashNotificationCount">1</div>
+                    </div>
+                    <div class="text-sm text-gray-600">SMS Sent</div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <div class="flex items-center gap-3 mb-2">
+                        <svg class="text-orange-600" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
                             <circle cx="12" cy="10" r="3"/>
                         </svg>
+                        <div class="text-2xl font-bold">26</div>
                     </div>
-                    <h3 class="text-xl font-bold mb-2">Location-Based</h3>
-                    <p class="text-gray-600">Get notifications only for programs in your barangay.</p>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-lg">
-                    <div class="bg-purple-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
-                        <svg class="text-purple-600" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">Secure & Private</h3>
-                    <p class="text-gray-600">OTP-based authentication protects your personal information.</p>
+                    <div class="text-sm text-gray-600">Barangays Covered</div>
                 </div>
             </div>
 
-            <div class="grid md:grid-cols-4 gap-6 mt-16">
-                <div class="bg-white p-6 rounded-lg shadow text-center">
-                    <div class="text-3xl font-bold text-blue-600">26</div>
-                    <div class="text-gray-600">Barangays</div>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow text-center">
-                    <div class="text-3xl font-bold text-green-600" id="residentCount">2</div>
-                    <div class="text-gray-600">Registered Residents</div>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow text-center">
-                    <div class="text-3xl font-bold text-purple-600" id="scheduleCount">2</div>
-                    <div class="text-gray-600">Active Programs</div>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow text-center">
-                    <div class="text-3xl font-bold text-orange-600" id="notificationCount">1</div>
-                    <div class="text-gray-600">Notifications Sent</div>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <!-- Login Modal -->
-    <div id="loginModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-        <div class="bg-white rounded-xl p-8 max-w-md w-full">
-            <div class="flex justify-between items-center mb-6">
-                <h3 class="text-2xl font-bold">Health Worker Login</h3>
-                <button onclick="closeLogin()" class="text-gray-500">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <line x1="18" y1="6" x2="6" y2="18"/>
-                        <line x1="6" y1="6" x2="18" y2="18"/>
-                    </svg>
-                </button>
-            </div>
-            
-            <div id="loginForm">
-                <div class="space-y-4">
-                    <div>
-                        <label class="block text-sm font-medium mb-2">Phone Number</label>
-                        <input type="tel" id="loginPhone" placeholder="09171234567" class="w-full border rounded-lg px-4 py-2">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium mb-2">Password</label>
-                        <input type="password" id="loginPassword" placeholder="Enter password" class="w-full border rounded-lg px-4 py-2">
-                    </div>
-                    <button onclick="sendOTP()" class="w-full bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700">
-                        Send OTP
-                    </button>
-                </div>
+            <!-- Upcoming Programs -->
+            <div class="bg-white p-6 rounded-lg shadow mb-6">
+                <h3 class="text-lg font-bold mb-4">Upcoming Programs</h3>
+                <div id="upcomingPrograms" class="space-y-3"></div>
             </div>
 
-            <div id="otpForm" class="hidden">
-                <div class="space-y-4">
-                    <p class="text-sm text-gray-600">An OTP has been sent to your phone</p>
-                    <p class="text-xs text-blue-600">Demo OTP: 123456</p>
-                    <div>
-                        <label class="block text-sm font-medium mb-2">Enter OTP</label>
-                        <input type="text" id="otpCode" placeholder="123456" maxlength="6" class="w-full border rounded-lg px-4 py-2 text-center text-2xl tracking-widest">
+            <!-- Post Announcement -->
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h3 class="text-xl font-bold mb-4">Post Announcement</h3>
+                <div class="space-y-3">
+                    <input id="annTitle" placeholder="Title"
+                           class="border p-2 w-full rounded-lg">
+                    <textarea id="annMessage" placeholder="Message"
+                              class="border p-2 w-full rounded-lg" rows="3"></textarea>
+                    <select id="annBarangay" class="border p-2 w-full rounded-lg">
+                        <option value="">All Barangays</option>
+                        <option value="Alang-alang">Alang-alang</option>
+                        <option value="Bakilid">Bakilid</option>
+                        <option value="Banilad">Banilad</option>
+                        <option value="Basak">Basak</option>
+                        <option value="Cabancalan">Cabancalan</option>
+                        <option value="Cambaro">Cambaro</option>
+                        <option value="Canduman">Canduman</option>
+                        <option value="Casili">Casili</option>
+                        <option value="Casuntingan">Casuntingan</option>
+                        <option value="Centro">Centro</option>
+                        <option value="Cubacub">Cubacub</option>
+                        <option value="Guizo">Guizo</option>
+                        <option value="Ibabao-Estancia">Ibabao-Estancia</option>
+                        <option value="Jagobiao">Jagobiao</option>
+                        <option value="Labogon">Labogon</option>
+                        <option value="Looc">Looc</option>
+                        <option value="Maguikay">Maguikay</option>
+                        <option value="Mantuyong">Mantuyong</option>
+                        <option value="Opao">Opao</option>
+                        <option value="Paknaan">Paknaan</option>
+                        <option value="Pagsabungan">Pagsabungan</option>
+                        <option value="Subangdaku">Subangdaku</option>
+                        <option value="Tabok">Tabok</option>
+                        <option value="Tawason">Tawason</option>
+                        <option value="Tingub">Tingub</option>
+                        <option value="Tipolo">Tipolo</option>
+                        <option value="Umapad">Umapad</option>
+                    </select>
+                    <div class="flex gap-3">
+                        <button id="postAnnBtn" onclick="postAnnouncement()"
+                                class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">
+                            Post Announcement
+                        </button>
+                        <button id="emergencyBtn" onclick="sendEmergency()"
+                                class="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition">
+                            🚨 Emergency Alert
+                        </button>
                     </div>
-                    <button onclick="verifyOTP()" class="w-full bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700">
-                        Verify & Login
-                    </button>
-                    <button onclick="backToLogin()" class="w-full text-gray-600 py-2">Back</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Resident Registration -->
-    <div id="residentRegistration" class="hidden min-h-screen bg-gradient-to-br from-blue-50 to-green-50 p-4">
-        <div class="max-w-2xl mx-auto mt-8">
-            <div class="bg-white rounded-xl shadow-lg p-8">
-                <button onclick="backToHome()" class="text-gray-600 mb-4 flex items-center gap-2">← Back</button>
-                <h2 class="text-3xl font-bold mb-6">Resident Registration</h2>
-                <p class="text-gray-600 mb-6">
-                    Register to receive SMS notifications about health programs, vaccinations, and medicine distribution in your barangay.
-                </p>
-                
-                <div class="space-y-4">
-                    <div>
-                        <label class="block text-sm font-medium mb-2">Full Name</label>
-                        <input type="text" id="residentName" placeholder="Juan Dela Cruz" class="w-full border rounded-lg px-4 py-2">
-                    </div>
-                    
-                    <div>
-                        <label class="block text-sm font-medium mb-2">Phone Number</label>
-                        <input type="tel" id="residentPhone" placeholder="09171234567" class="w-full border rounded-lg px-4 py-2">
-                        <input 
-id="residentPassword"
-type="password"
-placeholder="Create Password"
-class="w-full border rounded-lg px-4 py-2 mt-2"
-/>
-                        <p class="text-xs text-gray-500 mt-1">You will receive SMS notifications on this number</p>
-                    </div>
-                    
-                    <div>
-                        <label class="block text-sm font-medium mb-2">Barangay</label>
-                        <select id="residentBarangay" class="w-full border rounded-lg px-4 py-2">
-                            <option value="">Select Barangay</option>
-                            <option value="Alang-alang">Alang-alang</option>
-                            <option value="Bakilid">Bakilid</option>
-                            <option value="Banilad">Banilad</option>
-                            <option value="Basak">Basak</option>
-                            <option value="Cabancalan">Cabancalan</option>
-                            <option value="Cambaro">Cambaro</option>
-                            <option value="Canduman">Canduman</option>
-                            <option value="Casili">Casili</option>
-                            <option value="Casuntingan">Casuntingan</option>
-                            <option value="Centro">Centro</option>
-                            <option value="Cubacub">Cubacub</option>
-                            <option value="Guizo">Guizo</option>
-                        </select>
-                    </div>
-                    
-                    <div>
-                        <label class="block text-sm font-medium mb-2">Address</label>
-                        <textarea id="residentAddress" placeholder="Complete address" class="w-full border rounded-lg px-4 py-2" rows="3"></textarea>
-                    </div>
-                    
-                    <div class="bg-blue-50 p-4 rounded-lg">
-                        <p class="text-sm text-blue-800">
-                            🛡️ Your data is protected under RA 10173 (Data Privacy Act)
-                        </p>
-                    </div>
-                    
-                    <button onclick="registerResident()" class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700">
-                        Register Now
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-<!-- Resident Login -->
-
-<div id="residentLogin" class="hidden min-h-screen bg-gray-50 p-6">
-
-<div class="max-w-md mx-auto bg-white p-6 rounded-lg shadow">
-
-<h2 class="text-2xl font-bold mb-4">Resident Login</h2>
-
-<label class="block mb-2 text-sm">Phone Number</label>
-
-<input
-id="loginResidentPassword"
-type="password"
-placeholder="Password"
-class="w-full border rounded-lg px-4 py-2 mt-2"
-/>
-
-<button onclick="loginResident()"
-class="bg-blue-600 text-white px-4 py-2 rounded w-full">
-
-Login
-
-</button>
-
-<button onclick="backToHome()"
-class="mt-3 text-gray-600 w-full">
-
-Back
-
-</button>
-
-</div>
-
-</div>
-<!-- Resident Dashboard -->
-
-<div id="residentDashboard" class="hidden min-h-screen bg-gradient-to-br from-blue-50 to-green-50">
-
-<header class="bg-white shadow-md p-4 flex justify-between items-center">
-
-<div>
-<h2 class="text-xl font-bold">Resident Dashboard</h2>
-<p class="text-sm text-gray-600">
-Barangay: <span id="residentBarangayLabel"></span>
-</p>
-</div>
-
-<button onclick="logoutResident()" class="bg-red-500 text-white px-4 py-2 rounded">
-Logout
-</button>
-
-</header>
-
-<div class="max-w-5xl mx-auto p-6 space-y-6">
-
-<!-- Dashboard Stats -->
-
-<div class="grid md:grid-cols-4 gap-4">
-
-<div class="bg-white p-4 rounded-lg shadow text-center">
-<div class="text-2xl font-bold text-blue-600" id="statResidents">0</div>
-<div class="text-sm text-gray-600">Residents</div>
-</div>
-
-<div class="bg-white p-4 rounded-lg shadow text-center">
-<div class="text-2xl font-bold text-green-600" id="statPrograms">0</div>
-<div class="text-sm text-gray-600">Programs</div>
-</div>
-
-<div class="bg-white p-4 rounded-lg shadow text-center">
-<div class="text-2xl font-bold text-purple-600" id="statAlerts">0</div>
-<div class="text-sm text-gray-600">Alerts</div>
-</div>
-
-<div class="bg-white p-4 rounded-lg shadow text-center">
-<div class="text-2xl font-bold text-orange-600">26</div>
-<div class="text-sm text-gray-600">Barangays</div>
-</div>
-
-</div>
-
-<!-- Announcement Section -->
-
-<div class="bg-white p-6 rounded-lg shadow">
-
-<h3 class="text-xl font-bold mb-4">📢 Health Announcements</h3>
-
-<div id="residentAnnouncements" class="space-y-4"></div>
-
-</div>
-
-<!-- Upcoming Programs -->
-
-<div class="bg-white p-6 rounded-lg shadow">
-
-<h3 class="text-xl font-bold mb-4">📅 Upcoming Health Programs</h3>
-
-<div id="residentPrograms" class="space-y-3"></div>
-
-</div>
-
-<!-- Health Supplies -->
-
-<div class="bg-white p-6 rounded-lg shadow">
-
-<h3 class="text-xl font-bold mb-4">💊 Available Health Supplies</h3>
-
-<div id="residentSupplies" class="space-y-2"></div>
-
-</div>
-
-</div>
-
-</div>
-    <!-- Dashboard -->
-    <div id="dashboard" class="hidden min-h-screen bg-gray-50">
-        <header class="bg-white shadow-md">
-            <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-                <div class="flex items-center gap-3">
-                    <div class="bg-gradient-to-br from-blue-600 to-green-600 p-2 rounded-lg">
-                        <svg class="text-white" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                        </svg>
-                    </div>
-                    <div>
-                        <h1 class="text-xl font-bold text-gray-800">Platform A.L.A.G.A.</h1>
-                        <p class="text-xs text-gray-600">Health Worker Dashboard</p>
-                    </div>
-                </div>
-                <button onclick="logout()" class="text-red-600 hover:text-red-700 px-4 py-2">Logout</button>
-            </div>
-        </header>
-
-        <div class="bg-white border-b">
-            <div class="max-w-7xl mx-auto px-4">
-                <div class="flex gap-1 overflow-x-auto">
-                    <button onclick="showTab('overview')" id="tabOverview" class="px-4 py-3 font-medium whitespace-nowrap border-b-2 border-blue-600 text-blue-600">Dashboard</button>
-                    <button onclick="showTab('schedules')" id="tabSchedules" class="px-4 py-3 font-medium whitespace-nowrap text-gray-600">Schedules</button>
-                    <button onclick="showTab('residents')" id="tabResidents" class="px-4 py-3 font-medium whitespace-nowrap text-gray-600">Residents</button>
-                    <button onclick="showTab('notifications')" id="tabNotifications" class="px-4 py-3 font-medium whitespace-nowrap text-gray-600">Notifications</button>
-                    <button onclick="showTab('sms')" id="tabSms" class="px-4 py-3 font-medium whitespace-nowrap text-gray-600">Send SMS</button>
-                    <button onclick="showTab('supplies')" id="tabSupplies"
-class="px-4 py-3 font-medium whitespace-nowrap text-gray-600">
-
-Medicine Stocks
-
-</button>
-<div id="suppliesTab" class="hidden">
-
-<h2 class="text-2xl font-bold mb-6">Medicine Inventory</h2>
-
-<div class="bg-white p-6 rounded-lg shadow">
-
-<input id="medName" placeholder="Medicine name"
-class="border p-2 rounded w-full mb-2">
-
-<input id="medStock" type="number"
-placeholder="Stock quantity"
-class="border p-2 rounded w-full mb-2">
-
-<button onclick="addMedicine()"
-class="bg-green-600 text-white px-4 py-2 rounded">
-
-Add Medicine
-
-</button>
-
-<div id="medicineList" class="mt-6 space-y-2"></div>
-
-</div>
-
-</div>
-                    <button onclick="showTab('add')" id="tabAdd" class="px-4 py-3 font-medium whitespace-nowrap text-gray-600">Add Schedule</button>
                 </div>
             </div>
         </div>
 
-        <div class="max-w-7xl mx-auto px-4 py-6">
-            <!-- Overview Tab -->
-            <div id="overviewTab">
-                <h2 class="text-2xl font-bold mb-6">Dashboard Overview</h2>
-                
-                <div class="grid md:grid-cols-4 gap-4 mb-8">
-                    dashboard cards
-</div>
-<div class="bg-white p-6 rounded-lg shadow mt-6">
+        <!-- ── Schedules Tab ── -->
+        <div id="schedulesTab" class="hidden">
+            <h2 class="text-2xl font-bold mb-6">Health Schedules</h2>
+            <div id="schedulesList" class="space-y-4"></div>
+        </div>
 
-<h3 class="text-xl font-bold mb-4">Post Announcement</h3>
-
-<input id="annTitle" placeholder="Title"
-class="border p-2 w-full mb-2 rounded">
-
-<textarea id="annMessage"
-placeholder="Message"
-class="border p-2 w-full mb-2 rounded"></textarea>
-
-<select id="annBarangay"
-class="border p-2 w-full mb-3 rounded">
-
-<option value="">All Barangays</option>
-<option value="Alang-alang">Alang-alang</option>
-<option value="Bakilid">Bakilid</option>
-<option value="Banilad">Banilad</option>
-<option value="Basak">Basak</option>
-<option value="Cabancalan">Cabancalan</option>
-<option value="Cambaro">Cambaro</option>
-<option value="Canduman">Canduman</option>
-<option value="Casili">Casili</option>
-<option value="Casuntingan">Casuntingan</option>
-<option value="Centro">Centro</option>
-<option value="Cubacub">Cubacub</option>
-<option value="Guizo">Guizo</option>
-<option value="Ibabao-Estancia">Ibabao-Estancia</option>
-<option value="Jagobiao">Jagobiao</option>
-<option value="Labogon">Labogon</option>
-<option value="Looc">Looc</option>
-<option value="Maguikay">Maguikay</option>
-<option value="Mantuyong">Mantuyong</option>
-<option value="Opao">Opao</option>
-<option value="Paknaan">Paknaan</option>
-<option value="Pagsabungan">Pagsabungan</option>
-<option value="Subangdaku">Subangdaku</option>
-<option value="Tabok">Tabok</option>
-<option value="Tawason">Tawason</option>
-<option value="Tingub">Tingub</option>
-<option value="Tipolo">Tipolo</option>
-<option value="Umapad">Umapad</option>
-
-</select>
-
-<button onclick="postAnnouncement()"
-class="bg-blue-600 text-white px-4 py-2 rounded">
-
-Post Announcement
-
-</button>
-
-<button onclick="sendEmergency()"
-class="bg-red-600 text-white px-4 py-2 rounded mt-3">
-
-🚨 Emergency Alert
-
-</button>
-
-</div>
-                    <div class="bg-white p-6 rounded-lg shadow">
-                        <div class="flex items-center gap-3 mb-2">
-                            <svg class="text-blue-600" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                                <line x1="16" y1="2" x2="16" y2="6"/>
-                                <line x1="8" y1="2" x2="8" y2="6"/>
-                                <line x1="3" y1="10" x2="21" y2="10"/>
-                            </svg>
-                            <div class="text-2xl font-bold" id="dashScheduleCount">2</div>
-                        </div>
-                        <div class="text-sm text-gray-600">Active Schedules</div>
-                    </div>
-                    
-                    <div class="bg-white p-6 rounded-lg shadow">
-                        <div class="flex items-center gap-3 mb-2">
-                            <svg class="text-green-600" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                                <circle cx="9" cy="7" r="4"/>
-                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                            </svg>
-                            <div class="text-2xl font-bold" id="dashResidentCount">2</div>
-                        </div>
-                        <div class="text-sm text-gray-600">Registered Residents</div>
-                    </div>
-                    
-                    <div class="bg-white p-6 rounded-lg shadow">
-                        <div class="flex items-center gap-3 mb-2">
-                            <svg class="text-purple-600" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <line x1="22" y1="2" x2="11" y2="13"/>
-                                <polygon points="22 2 15 22 11 13 2 9 22 2"/>
-                            </svg>
-                            <div class="text-2xl font-bold" id="dashNotificationCount">1</div>
-                        </div>
-                        <div class="text-sm text-gray-600">SMS Sent</div>
-                    </div>
-                    
-                    <div class="bg-white p-6 rounded-lg shadow">
-                        <div class="flex items-center gap-3 mb-2">
-                            <svg class="text-orange-600" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                                <circle cx="12" cy="10" r="3"/>
-                            </svg>
-                            <div class="text-2xl font-bold">26</div>
-                        </div>
-                        <div class="text-sm text-gray-600">Barangays Covered</div>
-                    </div>
-                </div>
-
-                <div class="bg-white p-6 rounded-lg shadow">
-                    <h3 class="text-lg font-bold mb-4">Upcoming Programs</h3>
-                    <div id="upcomingPrograms" class="space-y-3"></div>
-                </div>
+        <!-- ── Residents Tab ── -->
+        <div id="residentsTab" class="hidden">
+            <h2 class="text-2xl font-bold mb-6">Registered Residents</h2>
+            <div class="bg-white rounded-lg shadow overflow-x-auto">
+                <table class="w-full">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Name</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Phone</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Barangay</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Registered</th>
+                        </tr>
+                    </thead>
+                    <tbody id="residentsTableBody" class="divide-y"></tbody>
+                </table>
             </div>
+        </div>
 
-            <!-- Schedules Tab -->
-            <div id="schedulesTab" class="hidden">
-                <h2 class="text-2xl font-bold mb-6">Health Schedules</h2>
-                <div id="schedulesList" class="space-y-4"></div>
-            </div>
+        <!-- ── Notifications Tab ── -->
+        <div id="notificationsTab" class="hidden">
+            <h2 class="text-2xl font-bold mb-6">SMS Notifications</h2>
+            <div id="notificationsList" class="space-y-4"></div>
+        </div>
 
-            <!-- Residents Tab -->
-            <div id="residentsTab" class="hidden">
-                <h2 class="text-2xl font-bold mb-6">Registered Residents</h2>
-                <div class="bg-white rounded-lg shadow overflow-x-auto">
-                    <table class="w-full">
-                        <thead class="bg-gray-50">
-                            <tr>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Name</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Phone</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Barangay</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Registered</th>
-                            </tr>
-                        </thead>
-                        <tbody id="residentsTableBody" class="divide-y"></tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Notifications Tab -->
-            <div id="notificationsTab" class="hidden">
-                <h2 class="text-2xl font-bold mb-6">SMS Notifications</h2>
-                <div id="notificationsList" class="space-y-4"></div>
-            </div>
-
-            <!-- SMS Tab -->
-            <div id="smsTab" class="hidden">
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div>
-                        <h2 class="text-2xl font-bold mb-6">Send SMS Alert</h2>
-                        <div class="bg-white p-6 rounded-lg shadow space-y-4">
-                            <div>
-                                <label class="block text-sm font-medium mb-2">Select Barangay</label>
-                                <select id="smsBarangay" class="w-full border rounded-lg px-4 py-2">
-                                    <option value="">All Barangays</option>
-                                    <option value="Centro">Centro</option>
-                                    <option value="Bakilid">Bakilid</option>
-                                    <option value="Banilad">Banilad</option>
-                                    <option value="Basak">Basak</option>
-                                    <option value="Cabancalan">Cabancalan</option>
-                                </select>
-                                <p class="text-xs text-gray-500 mt-1">
-                                    Recipients: <span id="smsRecipientCount">0</span> residents
-                                </p>
-                            </div>
-
-                            <div>
-                                <label class="block text-sm font-medium mb-2">Message Template</label>
-                                <select id="smsTemplate" onchange="applyTemplate()" class="w-full border rounded-lg px-4 py-2">
-                                    <option value="">Custom Message</option>
-                                    <option value="vaccination">Vaccination Alert</option>
-                                    <option value="medicine">Medicine Distribution</option>
-                                    <option value="reminder">Appointment Reminder</option>
-                                    <option value="emergency">Emergency Alert</option>
-                                </select>
-                            </div>
-                            
-                            <div>
-                                <label class="block text-sm font-medium mb-2">Message</label>
-                                <textarea 
-                                    id="smsMessage" 
-                                    placeholder="Enter your message here..." 
-                                    class="w-full border rounded-lg px-4 py-2" 
-                                    rows="6"
-                                    maxlength="160"
-                                    oninput="updateCharCount()"
-                                ></textarea>
-                                <div class="flex justify-between text-xs text-gray-500 mt-1">
-                                    <span id="charCount">0/160 characters</span>
-                                    <span id="smsCount">1 SMS</span>
-                                </div>
-                            </div>
-
-                            <div class="bg-yellow-50 p-4 rounded-lg">
-                                <p class="text-sm text-yellow-800">
-                                    ⚠️ SMS will be sent to <span id="smsRecipientCount2">0</span> registered residents
-                                </p>
-                            </div>
-                            
-                            <button onclick="sendSMS()" class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700">
-                                📤 Send SMS Now
-                            </button>
-                        </div>
-                    </div>
-
-                    <div>
-                        <h2 class="text-2xl font-bold mb-6">SMS Preview</h2>
-                        <div class="sms-preview">
-                            <div class="text-xs mb-2 opacity-75">Platform A.L.A.G.A.</div>
-                            <div id="smsPreview" class="sms-bubble">
-                                <p class="text-sm">Your message will appear here...</p>
-                            </div>
-                            <div class="text-xs mt-2 opacity-75">
-                                Sent to: <span id="previewBarangay">All residents</span>
-                            </div>
-                        </div>
-
-                        <div class="mt-6 bg-white p-6 rounded-lg shadow">
-                            <h3 class="font-bold mb-3">Quick Stats</h3>
-                            <div class="space-y-2 text-sm">
-                                <div class="flex justify-between">
-                                    <span class="text-gray-600">Total Residents:</span>
-                                    <span class="font-semibold" id="totalResidents">0</span>
-                                </div>
-                                <div class="flex justify-between">
-                                    <span class="text-gray-600">Selected Recipients:</span>
-                                    <span class="font-semibold text-blue-600" id="selectedRecipients">0</span>
-                                </div>
-                                <div class="flex justify-between">
-                                    <span class="text-gray-600">SMS Cost (₱1 each):</span>
-                                    <span class="font-semibold text-green-600">₱<span id="smsCost">0</span></span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="mt-6 bg-blue-50 p-4 rounded-lg">
-                            <h4 class="font-semibold text-blue-900 mb-2">SMS Best Practices</h4>
-                            <ul class="text-sm text-blue-800 space-y-1">
-                                <li>• Keep messages clear and concise</li>
-                                <li>• Include date, time, and location</li>
-                                <li>• Use proper grammar and spelling</li>
-                                <li>• Avoid using all caps</li>
-                                <li>• Include contact info for questions</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Add Schedule Tab -->
-            <div id="addTab" class="hidden max-w-2xl">
-                <h2 class="text-2xl font-bold mb-6">Add New Schedule</h2>
-                <div class="bg-white p-6 rounded-lg shadow space-y-4">
-                    <div>
-                        <label class="block text-sm font-medium mb-2">Program Title</label>
-                        <input type="text" id="newTitle" placeholder="COVID-19 Vaccination" class="w-full border rounded-lg px-4 py-2">
-                    </div>
-                    
-                    <div>
-                        <label class="block text-sm font-medium mb-2">Type</label>
-                        <select id="newType" class="w-full border rounded-lg px-4 py-2">
-                            <option value="vaccination">Vaccination</option>
-                            <option value="medicine">Medicine Distribution</option>
-                            <option value="health_program">Health Program</option>
-                        </select>
-                    </div>
-                    
-                    <div>
-                        <label class="block text-sm font-medium mb-2">Barangay</label>
-                        <select id="newBarangay" class="w-full border rounded-lg px-4 py-2">
-                            <option value="">Select Barangay</option>
-                            <option value="Centro">Centro</option>
-                            <option value="Bakilid">Bakilid</option>
-                            <option value="Banilad">Banilad</option>
-                        </select>
-                    </div>
-                    
-                    <div class="grid md:grid-cols-2 gap-4">
+        <!-- ── SMS Tab ── -->
+        <div id="smsTab" class="hidden">
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Left: Form -->
+                <div>
+                    <h2 class="text-2xl font-bold mb-6">Send SMS Alert</h2>
+                    <div class="bg-white p-6 rounded-lg shadow space-y-4">
                         <div>
-                            <label class="block text-sm font-medium mb-2">Date</label>
-                            <input type="date" id="newDate" class="w-full border rounded-lg px-4 py-2">
+                            <label class="block text-sm font-medium mb-2">Select Barangay</label>
+                            <select id="smsBarangay" onchange="updateRecipientCount()" class="w-full border rounded-lg px-4 py-2">
+                                <option value="">All Barangays</option>
+                                <option value="Alang-alang">Alang-alang</option>
+                                <option value="Bakilid">Bakilid</option>
+                                <option value="Banilad">Banilad</option>
+                                <option value="Basak">Basak</option>
+                                <option value="Cabancalan">Cabancalan</option>
+                                <option value="Cambaro">Cambaro</option>
+                                <option value="Canduman">Canduman</option>
+                                <option value="Casili">Casili</option>
+                                <option value="Casuntingan">Casuntingan</option>
+                                <option value="Centro">Centro</option>
+                                <option value="Cubacub">Cubacub</option>
+                                <option value="Guizo">Guizo</option>
+                                <option value="Ibabao-Estancia">Ibabao-Estancia</option>
+                                <option value="Jagobiao">Jagobiao</option>
+                                <option value="Labogon">Labogon</option>
+                                <option value="Looc">Looc</option>
+                                <option value="Maguikay">Maguikay</option>
+                                <option value="Mantuyong">Mantuyong</option>
+                                <option value="Opao">Opao</option>
+                                <option value="Paknaan">Paknaan</option>
+                                <option value="Pagsabungan">Pagsabungan</option>
+                                <option value="Subangdaku">Subangdaku</option>
+                                <option value="Tabok">Tabok</option>
+                                <option value="Tawason">Tawason</option>
+                                <option value="Tingub">Tingub</option>
+                                <option value="Tipolo">Tipolo</option>
+                                <option value="Umapad">Umapad</option>
+                            </select>
+                            <p class="text-xs text-gray-500 mt-1">
+                                Recipients: <span id="smsRecipientCount">0</span> residents
+                            </p>
                         </div>
+
                         <div>
-                            <label class="block text-sm font-medium mb-2">Time</label>
-                            <input type="text" id="newTime" placeholder="09:00 AM - 04:00 PM" class="w-full border rounded-lg px-4 py-2">
+                            <label class="block text-sm font-medium mb-2">Message Template</label>
+                            <select id="smsTemplate" onchange="applyTemplate()" class="w-full border rounded-lg px-4 py-2">
+                                <option value="">Custom Message</option>
+                                <option value="vaccination">Vaccination Alert</option>
+                                <option value="medicine">Medicine Distribution</option>
+                                <option value="reminder">Appointment Reminder</option>
+                                <option value="emergency">Emergency Alert</option>
+                            </select>
                         </div>
+
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Message</label>
+                            <textarea id="smsMessage" placeholder="Enter your message here…"
+                                      class="w-full border rounded-lg px-4 py-2"
+                                      rows="6" maxlength="160"
+                                      oninput="updateCharCount()"></textarea>
+                            <div class="flex justify-between text-xs text-gray-500 mt-1">
+                                <span id="charCount">0/160 characters</span>
+                                <span id="smsCount">1 SMS</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-yellow-50 p-4 rounded-lg">
+                            <p class="text-sm text-yellow-800">
+                                ⚠️ SMS will be sent to <span id="smsRecipientCount2">0</span> registered residents
+                            </p>
+                        </div>
+
+                        <button id="sendSmsBtn" onclick="sendSMS()"
+                                class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
+                            📤 Send SMS Now
+                        </button>
                     </div>
-                    
-                    <div>
-                        <label class="block text-sm font-medium mb-2">Location</label>
-                        <input type="text" id="newLocation" placeholder="Barangay Hall" class="w-full border rounded-lg px-4 py-2">
-                    </div>
-                    
-                    <div>
-                        <label class="block text-sm font-medium mb-2">Available Slots</label>
-                        <input type="number" id="newSlots" placeholder="100" class="w-full border rounded-lg px-4 py-2">
-                    </div>
-                    
-                    <div>
-                        <label class="block text-sm font-medium mb-2">Description</label>
-                        <textarea id="newDescription" placeholder="Program details..." class="w-full border rounded-lg px-4 py-2" rows="3"></textarea>
+                </div>
+
+                <!-- Right: Preview + Tips -->
+                <div>
+                    <h2 class="text-2xl font-bold mb-6">SMS Preview</h2>
+                    <div class="sms-preview">
+                        <div class="text-xs mb-2 opacity-75">Platform A.L.A.G.A.</div>
+                        <div id="smsPreview" class="sms-bubble">
+                            <p class="text-sm text-gray-400">Your message will appear here…</p>
+                        </div>
+                        <div class="text-xs mt-2 opacity-75">
+                            Sent to: <span id="previewBarangay">All residents</span>
+                        </div>
                     </div>
 
-                    <div class="flex items-center gap-2">
-                        <input type="checkbox" id="sendSmsOnCreate" checked class="rounded">
-                        <label for="sendSmsOnCreate" class="text-sm">Send SMS notification to residents</label>
+                    <div class="mt-6 bg-white p-6 rounded-lg shadow">
+                        <h3 class="font-bold mb-3">Quick Stats</h3>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Total Residents:</span>
+                                <span class="font-semibold" id="totalResidents">0</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Selected Recipients:</span>
+                                <span class="font-semibold text-blue-600" id="selectedRecipients">0</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">SMS Cost (₱1 each):</span>
+                                <span class="font-semibold text-green-600">₱<span id="smsCost">0</span></span>
+                            </div>
+                        </div>
                     </div>
-                    
-                    <button onclick="addSchedule()" class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700">
-                        Add Schedule & Send SMS
-                    </button>
+
+                    <div class="mt-6 bg-blue-50 p-4 rounded-lg">
+                        <h4 class="font-semibold text-blue-900 mb-2">SMS Best Practices</h4>
+                        <ul class="text-sm text-blue-800 space-y-1">
+                            <li>• Keep messages clear and concise</li>
+                            <li>• Include date, time, and location</li>
+                            <li>• Use proper grammar and spelling</li>
+                            <li>• Avoid using all caps</li>
+                            <li>• Include contact info for questions</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- SMS Success Modal -->
-    <div id="smsSuccessModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-        <div class="bg-white rounded-xl p-8 max-w-md w-full animate-slide-in">
-            <div class="text-center">
-                <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <svg class="text-green-600" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="20 6 9 17 4 12"/>
-                    </svg>
+        <!-- ── Medicine Stocks Tab ── -->
+        <div id="suppliesTab" class="hidden">
+            <h2 class="text-2xl font-bold mb-6">Medicine Inventory</h2>
+            <div class="bg-white p-6 rounded-lg shadow max-w-xl">
+                <div class="space-y-3 mb-4">
+                    <input id="medName" placeholder="Medicine name"
+                           class="border p-2 rounded-lg w-full">
+                    <input id="medStock" type="number" placeholder="Stock quantity" min="1"
+                           class="border p-2 rounded-lg w-full">
+                    <button onclick="addMedicine()"
+                            class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition">
+                        Add Medicine
+                    </button>
                 </div>
-                <h3 class="text-2xl font-bold mb-2">SMS Sent Successfully!</h3>
-                <p class="text-gray-600 mb-4" id="smsSuccessMessage">
-                    Message sent to 0 residents
-                </p>
-                <button onclick="closeSmsSuccess()" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
-                    Done
+                <div id="medicineList" class="mt-4 space-y-2"></div>
+            </div>
+        </div>
+
+        <!-- ── Add Schedule Tab ── -->
+        <div id="addTab" class="hidden max-w-2xl">
+            <h2 class="text-2xl font-bold mb-6">Add New Schedule</h2>
+            <div class="bg-white p-6 rounded-lg shadow space-y-4">
+                <div>
+                    <label class="block text-sm font-medium mb-2">Program Title <span class="text-red-500">*</span></label>
+                    <input type="text" id="newTitle" placeholder="COVID-19 Vaccination"
+                           class="w-full border rounded-lg px-4 py-2">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-2">Type</label>
+                    <select id="newType" class="w-full border rounded-lg px-4 py-2">
+                        <option value="vaccination">Vaccination</option>
+                        <option value="medicine">Medicine Distribution</option>
+                        <option value="health_program">Health Program</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-2">Barangay <span class="text-red-500">*</span></label>
+                    <select id="newBarangay" class="w-full border rounded-lg px-4 py-2">
+                        <option value="">Select Barangay</option>
+                        <option value="Alang-alang">Alang-alang</option>
+                        <option value="Bakilid">Bakilid</option>
+                        <option value="Banilad">Banilad</option>
+                        <option value="Basak">Basak</option>
+                        <option value="Cabancalan">Cabancalan</option>
+                        <option value="Cambaro">Cambaro</option>
+                        <option value="Canduman">Canduman</option>
+                        <option value="Casili">Casili</option>
+                        <option value="Casuntingan">Casuntingan</option>
+                        <option value="Centro">Centro</option>
+                        <option value="Cubacub">Cubacub</option>
+                        <option value="Guizo">Guizo</option>
+                        <option value="Ibabao-Estancia">Ibabao-Estancia</option>
+                        <option value="Jagobiao">Jagobiao</option>
+                        <option value="Labogon">Labogon</option>
+                        <option value="Looc">Looc</option>
+                        <option value="Maguikay">Maguikay</option>
+                        <option value="Mantuyong">Mantuyong</option>
+                        <option value="Opao">Opao</option>
+                        <option value="Paknaan">Paknaan</option>
+                        <option value="Pagsabungan">Pagsabungan</option>
+                        <option value="Subangdaku">Subangdaku</option>
+                        <option value="Tabok">Tabok</option>
+                        <option value="Tawason">Tawason</option>
+                        <option value="Tingub">Tingub</option>
+                        <option value="Tipolo">Tipolo</option>
+                        <option value="Umapad">Umapad</option>
+                    </select>
+                </div>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Date <span class="text-red-500">*</span></label>
+                        <input type="date" id="newDate" class="w-full border rounded-lg px-4 py-2">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Time</label>
+                        <input type="text" id="newTime" placeholder="09:00 AM - 04:00 PM"
+                               class="w-full border rounded-lg px-4 py-2">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-2">Location</label>
+                    <input type="text" id="newLocation" placeholder="Barangay Hall"
+                           class="w-full border rounded-lg px-4 py-2">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-2">Available Slots</label>
+                    <input type="number" id="newSlots" placeholder="100" min="1"
+                           class="w-full border rounded-lg px-4 py-2">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-2">Description</label>
+                    <textarea id="newDescription" placeholder="Program details…"
+                              class="w-full border rounded-lg px-4 py-2" rows="3"></textarea>
+                </div>
+                <div class="flex items-center gap-2">
+                    <input type="checkbox" id="sendSmsOnCreate" checked class="rounded">
+                    <label for="sendSmsOnCreate" class="text-sm">Send SMS notification to residents</label>
+                </div>
+                <button onclick="addSchedule()"
+                        class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
+                    Add Schedule &amp; Send SMS
                 </button>
             </div>
         </div>
+
+    </div><!-- /max-w-7xl -->
+</div><!-- /dashboard -->
+
+
+<!-- ═══════════════════════════════════════════════
+     SMS SUCCESS MODAL
+════════════════════════════════════════════════ -->
+<div id="smsSuccessModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+    <div class="bg-white rounded-xl p-8 max-w-md w-full animate-slide-in">
+        <div class="text-center">
+            <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="text-green-600" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="20 6 9 17 4 12"/>
+                </svg>
+            </div>
+            <h3 class="text-2xl font-bold mb-2">SMS Sent Successfully!</h3>
+            <p class="text-gray-600 mb-4" id="smsSuccessMessage">Message sent to 0 residents</p>
+            <button onclick="closeSmsSuccess()"
+                    class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">
+                Done
+            </button>
+        </div>
     </div>
-
-    <script>
-        // Data storage
-        let schedules = [
-            {
-                id: 1,
-                title: 'COVID-19 Booster Vaccination',
-                barangay: 'Centro',
-                date: '2026-01-15',
-                time: '09:00 AM - 04:00 PM',
-                location: 'Centro Barangay Hall',
-                slots: 150,
-                slotsUsed: 45,
-                type: 'vaccination',
-                description: 'Free COVID-19 booster shots available for all residents 18 years and above.'
-            },
-            {
-                id: 2,
-                title: 'Free Medicine Distribution',
-                barangay: 'Bakilid',
-                date: '2026-01-18',
-                time: '08:00 AM - 12:00 PM',
-                location: 'Bakilid Health Center',
-                slots: 200,
-                slotsUsed: 78,
-                type: 'medicine',
-                description: 'Free maintenance medicines for senior citizens and PWDs.'
-            }
-        ];
-
-        let supplies = [
-
-{ name:"Paracetamol", stock:120 },
-{ name:"Vitamin C", stock:80 },
-{ name:"ORS Packs", stock:50 },
-{ name:"Dengue Test Kits", stock:12 }
-
-];
-
-        let residents = [
-            { id: 1, name: 'Maria Santos', phone: '09171234567', barangay: 'Centro', registered: '2026-01-10' },
-            { id: 2, name: 'Juan Dela Cruz', phone: '09281234568', barangay: 'Bakilid', registered: '2026-01-11' }
-        ];
-
-        let notifications = [
-            {
-                id: 1,
-                message: 'COVID-19 Booster Vaccination scheduled for January 15 at Centro Barangay Hall',
-                barangay: 'Centro',
-                sent: '2026-01-12 10:30 AM',
-                recipients: 1250
-            }
-        ];
-
-        // SMS Templates
-        const smsTemplates = {
-            vaccination: 'ALAGA ALERT: Free COVID-19 vaccination on [DATE] at [LOCATION]. Bring valid ID. Slots limited. For info: 0917-XXX-XXXX',
-            medicine: 'ALAGA ALERT: Free medicine distribution for seniors & PWDs on [DATE] at [LOCATION]. Bring ID & senior citizen card.',
-            reminder: 'REMINDER: You have a health appointment on [DATE] at [LOCATION]. Please arrive on time. Contact us: 0917-XXX-XXXX',
-            emergency: 'URGENT ALERT: Important health advisory for [BARANGAY]. Please check with your barangay health center immediately.'
-        };
-
-        // Update recipient count when barangay changes
-        document.addEventListener('DOMContentLoaded', function() {
-            const smsBarangay = document.getElementById('smsBarangay');
-            if (smsBarangay) {
-                smsBarangay.addEventListener('change', updateRecipientCount);
-            }
-        });
-
-        function updateRecipientCount() {
-            const barangay = document.getElementById('smsBarangay').value;
-            let count = 0;
-            
-            if (barangay === '') {
-                count = residents.length;
-            } else {
-                count = residents.filter(r => r.barangay === barangay).length;
-            }
-            
-            document.getElementById('smsRecipientCount').textContent = count;
-            document.getElementById('smsRecipientCount2').textContent = count;
-            document.getElementById('selectedRecipients').textContent = count;
-            document.getElementById('smsCost').textContent = count;
-            document.getElementById('totalResidents').textContent = residents.length;
-            
-            const barangayText = barangay || 'All barangays';
-            document.getElementById('previewBarangay').textContent = barangayText;
-        }
-
-        function applyTemplate() {
-            const template = document.getElementById('smsTemplate').value;
-            if (template && smsTemplates[template]) {
-                document.getElementById('smsMessage').value = smsTemplates[template];
-                updateCharCount();
-                updatePreview();
-            }
-        }
-
-        function updateCharCount() {
-            const message = document.getElementById('smsMessage').value;
-            const length = message.length;
-            const smsCount = Math.ceil(length / 160) || 1;
-            
-            document.getElementById('charCount').textContent = length + '/160 characters';
-            document.getElementById('smsCount').textContent = smsCount + ' SMS';
-            
-            updatePreview();
-        }
-
-function updatePreview() {
-    const message = document.getElementById('smsMessage').value;
-    const preview = document.getElementById('smsPreview');
-    
-    if (message.trim()) {
-        preview.innerHTML = '<p class="text-sm whitespace-pre-wrap">' + message + '</p>';
-    } else {
-        preview.innerHTML = '<p class="text-sm">Your message will appear here...</p>';
-    }
-}
-async function sendRealSMS(phone, message){
-
-const apiKey = "1697|2hlOHLNmvN7dFRrAynP2pIlzddhrrYbGqJ9M986L1e6978ed";
-
-try {
-
-const response = await fetch("https://dashboard.philsms.com/api/v3/sms/send",{
-method:"POST",
-headers:{
-"Content-Type":"application/json",
-"Authorization":"Bearer " + apiKey
-},
-body: JSON.stringify({
-recipient: phone,
-sender_id: "PhilSMS",
-type: "plain",
-message: message
-})
-});
-
-const data = await response.json();
-console.log("SMS Response:", data);
-
-if(data.status === "success"){
-alert("SMS sent successfully!");
-}else{
-alert("SMS failed: " + data.message);
-}
-
-}catch(err){
-console.error("SMS ERROR:", err);
-}
-
-}
-        function sendSMS() {
-            const barangay = document.getElementById('smsBarangay').value;
-            const message = document.getElementById('smsMessage').value;
-            
-            if (!message.trim()) {
-                alert('Please enter a message');
-                return;
-            }
-            
-            let recipients = residents;
-if (barangay) {
-    recipients = residents.filter(r => r.barangay === barangay);
-}
-
-if (recipients.length === 0) {
-    alert('No recipients found for the selected barangay');
-    return;
-}
-// SEND SMS HERE
-for (const r of recipients) {
-    sendRealSMS(r.phone, message);
-}
-
-            // Simulate sending SMS
-            const notification = {
-                id: notifications.length + 1,
-                message: message,
-                barangay: barangay || 'All Barangays',
-                sent: new Date().toLocaleString(),
-                recipients: recipients.length
-            };
-            
-            notifications.push(notification);
-            
-            // Clear form
-            document.getElementById('smsMessage').value = '';
-            document.getElementById('smsTemplate').value = '';
-            document.getElementById('smsBarangay').value = '';
-            updateCharCount();
-            updateRecipientCount();
-            
-            // Show success modal
-            document.getElementById('smsSuccessMessage').textContent = 
-                'Message sent to ' + recipients.length + ' residents in ' + (barangay || 'all barangays');
-            document.getElementById('smsSuccessModal').classList.remove('hidden');
-            
-            updateCounts();
-        }
-
-        function closeSmsSuccess() {
-            document.getElementById('smsSuccessModal').classList.add('hidden');
-        }
-
-        // Navigation functions
-        function showLogin() {
-            document.getElementById('loginModal').classList.remove('hidden');
-        }
-
-        function closeLogin() {
-            document.getElementById('loginModal').classList.add('hidden');
-            document.getElementById('loginForm').classList.remove('hidden');
-            document.getElementById('otpForm').classList.add('hidden');
-        }
-
-        function sendOTP() {
-            const phone = document.getElementById('loginPhone').value;
-            const password = document.getElementById('loginPassword').value;
-            
-            if (phone && password) {
-                document.getElementById('loginForm').classList.add('hidden');
-                document.getElementById('otpForm').classList.remove('hidden');
-            } else {
-                alert('Please enter phone number and password');
-            }
-        }
-
-        function backToLogin() {
-            document.getElementById('loginForm').classList.remove('hidden');
-            document.getElementById('otpForm').classList.add('hidden');
-        }
-
-        function verifyOTP() {
-            const otp = document.getElementById('otpCode').value;
-            
-            if (otp === '123456') {
-                closeLogin();
-                document.getElementById('landingPage').classList.add('hidden');
-                document.getElementById('dashboard').classList.remove('hidden');
-                renderDashboard();
-                updateRecipientCount();
-                loadResidents();
-            } else {
-              
-                alert('Invalid OTP. For demo, use: 123456');
-            }
-        }
-
-        function showResidentRegistration() {
-            document.getElementById('landingPage').classList.add('hidden');
-            document.getElementById('residentRegistration').classList.remove('hidden');
-        }
-        function showResidentLogin(){
-
-document.getElementById("landingPage").classList.add("hidden");
-document.getElementById("residentLogin").classList.remove("hidden");
-
-}
-
-        function backToHome() {
-            document.getElementById('residentRegistration').classList.add('hidden');
-            document.getElementById('landingPage').classList.remove('hidden');
-        }
-
-        async function registerResident() {
-
-const name = document.getElementById('residentName').value;
-const phone = document.getElementById('residentPhone').value;
-const password = document.getElementById("residentPassword").value;
-const barangay = document.getElementById('residentBarangay').value;
-const address = document.getElementById('residentAddress').value;
-
-if (!name || !phone || !barangay) {
-alert("Please fill all required fields");
-return;
-}
-
-try {
-
-const { addDoc, collection } = await import(
-"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js"
-);
-
-await addDoc(collection(window.db,"residents"),{
-name:name,
-phone:phone,
-password:password,
-barangay:barangay,
-address:address,
-vaccine:"Not Recorded",
-registered:new Date().toISOString().split('T')[0]
-});
-
-residents.push({
-name:name,
-phone:phone,
-barangay:barangay,
-registered:new Date().toISOString().split('T')[0]
-});
-
-localStorage.setItem("residentBarangay", barangay);
-
-document.getElementById('residentName').value="";
-document.getElementById('residentPhone').value="";
-document.getElementById('residentBarangay').value="";
-document.getElementById('residentAddress').value="";
-
-updateCounts();
-
-alert("Registration complete! Opening dashboard...");
-
-document.getElementById("residentRegistration").classList.add("hidden");
-document.getElementById("landingPage").classList.add("hidden");
-document.getElementById("residentDashboard").classList.remove("hidden");
-
-loadResidentAnnouncements();
-loadResidentPrograms();
-
-}catch(err){
-
-console.error(err);
-alert("Error saving resident.");
-
-}
-
-}
-
-        function logout() {
-            document.getElementById('dashboard').classList.add('hidden');
-            document.getElementById('landingPage').classList.remove('hidden');
-        }
-
-        function showTab(tabName) {
-            // Hide all tabs
-            document.querySelectorAll('[id$="Tab"]').forEach(tab => tab.classList.add('hidden'));
-            
-            // Remove active styling from all buttons
-            document.querySelectorAll('[id^="tab"]').forEach(btn => {
-                btn.classList.remove('border-blue-600', 'text-blue-600', 'border-b-2');
-                btn.classList.add('text-gray-600');
-            });
-            
-            // Show selected tab
-            document.getElementById(tabName + 'Tab').classList.remove('hidden');
-            
-            // Add active styling to selected button
-            const btn = document.getElementById('tab' + tabName.charAt(0).toUpperCase() + tabName.slice(1));
-            btn.classList.add('border-blue-600', 'text-blue-600', 'border-b-2');
-            btn.classList.remove('text-gray-600');
-            
-            // Render content for specific tabs
-            if (tabName === 'schedules') renderSchedules();
-            if (tabName === 'residents') renderResidents();
-            if (tabName === 'notifications') renderNotifications();
-            if (tabName === 'sms') updateRecipientCount();
-        }
-
-        function addSchedule() {
-            const title = document.getElementById('newTitle').value;
-            const type = document.getElementById('newType').value;
-            const barangay = document.getElementById('newBarangay').value;
-            const date = document.getElementById('newDate').value;
-            const time = document.getElementById('newTime').value;
-            const location = document.getElementById('newLocation').value;
-            const slots = document.getElementById('newSlots').value;
-            const description = document.getElementById('newDescription').value;
-            const sendSms = document.getElementById('sendSmsOnCreate').checked;
-            
-            if (title && barangay && date) {
-                const schedule = {
-                    id: schedules.length + 1,
-                    title: title,
-                    type: type,
-                    barangay: barangay,
-                    date: date,
-                    time: time,
-                    location: location,
-                    slots: parseInt(slots) || 100,
-                    slotsUsed: 0,
-                    description: description
-                };
-                schedules.push(schedule);
-                
-                if (sendSms) {
-                    const notification = {
-                        id: notifications.length + 1,
-                        message: title + ' scheduled for ' + date + ' at ' + location + '. ' + description,
-                        barangay: barangay,
-                        sent: new Date().toLocaleString(),
-                        recipients: residents.filter(r => r.barangay === barangay).length
-                    };
-                    notifications.push(notification);
-                }
-                
-                // Clear form
-                document.getElementById('newTitle').value = '';
-                document.getElementById('newType').value = 'vaccination';
-                document.getElementById('newBarangay').value = '';
-                document.getElementById('newDate').value = '';
-                document.getElementById('newTime').value = '';
-                document.getElementById('newLocation').value = '';
-                document.getElementById('newSlots').value = '';
-                document.getElementById('newDescription').value = '';
-                
-                updateCounts();
-                const msg = sendSms ? 'Schedule added and SMS notifications sent to residents!' : 'Schedule added successfully!';
-                alert(msg);
-                showTab('overview');
-                renderDashboard();
-            } else {
-                alert('Please fill in all required fields');
-            }
-        }
-
-        function deleteSchedule(id) {
-            if (confirm('Are you sure you want to delete this schedule?')) {
-                schedules = schedules.filter(s => s.id !== id);
-                updateCounts();
-                renderSchedules();
-                renderDashboard();
-            }
-        }
-
-        function updateCounts() {
-            document.getElementById('residentCount').textContent = residents.length;
-            document.getElementById('scheduleCount').textContent = schedules.length;
-            document.getElementById('notificationCount').textContent = notifications.length;
-            document.getElementById('dashResidentCount').textContent = residents.length;
-            document.getElementById('dashScheduleCount').textContent = schedules.length;
-            document.getElementById('dashNotificationCount').textContent = notifications.length;
-            document.getElementById("statResidents").textContent = residents.length;
-            document.getElementById("statPrograms").textContent = schedules.length;
-            document.getElementById("statAlerts").textContent = notifications.length;
-        }
-
-        function renderDashboard() {
-            const upcomingDiv = document.getElementById('upcomingPrograms');
-            upcomingDiv.innerHTML = schedules.map(s => `
-                <div class="border-l-4 border-blue-600 pl-4 py-2">
-                    <div class="font-semibold">${s.title}</div>
-                    <div class="text-sm text-gray-600">${s.barangay} - ${s.date} - ${s.time}</div>
-                    <div class="text-sm text-gray-500 mt-1">Slots: ${s.slotsUsed}/${s.slots}</div>
-                </div>
-            `).join('');
-        }
-
-        function renderSchedules() {
-            const schedDiv = document.getElementById('schedulesList');
-            schedDiv.innerHTML = schedules.map(s => {
-                const typeClass = s.type === 'vaccination' ? 'bg-blue-100 text-blue-700' :
-                                 s.type === 'medicine' ? 'bg-green-100 text-green-700' :
-                                 'bg-purple-100 text-purple-700';
-                return `
-                    <div class="bg-white p-6 rounded-lg shadow">
-                        <div class="flex justify-between items-start mb-3">
-                            <div class="flex-1">
-                                <div class="flex items-center gap-2 mb-2">
-                                    <h3 class="text-xl font-bold">${s.title}</h3>
-                                    <span class="px-2 py-1 text-xs rounded-full ${typeClass}">${s.type.replace('_', ' ')}</span>
-                                </div>
-                                <p class="text-gray-600 mb-3">${s.description}</p>
-                                <div class="grid sm:grid-cols-2 gap-2 text-sm">
-                                    <div>📍 ${s.barangay}</div>
-                                    <div>📅 ${s.date}</div>
-                                    <div>📦 ${s.location}</div>
-                                    <div>👥 ${s.slotsUsed}/${s.slots} slots</div>
-                                </div>
-                            </div>
-                            <button onclick="deleteSchedule(${s.id})" class="text-red-600 hover:text-red-700 p-2">🗑️</button>
-                        </div>
-                        <div class="w-full bg-gray-200 rounded-full h-2 mt-3">
-                            <div class="bg-blue-600 h-2 rounded-full" style="width: ${(s.slotsUsed / s.slots * 100)}%"></div>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-        }
-
-        function renderResidents() {
-            const tbody = document.getElementById('residentsTableBody');
-            tbody.innerHTML = residents.map(r => `
-                <tr>
-                    <td class="px-6 py-4">${r.name}</td>
-                    <td class="px-6 py-4">${r.phone}</td>
-                    <td class="px-6 py-4">${r.barangay}</td>
-                    <td class="px-6 py-4">${r.registered}</td>
-                </tr>
-            `).join('');
-        }
-
-        function renderNotifications() {
-            const notifDiv = document.getElementById('notificationsList');
-            notifDiv.innerHTML = notifications.map(n => `
-                <div class="bg-white p-6 rounded-lg shadow">
-                    <div class="flex items-start gap-3">
-                        <div class="text-blue-600 mt-1">📤</div>
-                        <div class="flex-1">
-                            <p class="font-medium">${n.message}</p>
-                            <div class="text-sm text-gray-600 mt-2">
-                                Sent to ${n.recipients} residents in ${n.barangay}
-                            </div>
-                            <div class="text-xs text-gray-500 mt-1">${n.sent}</div>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-        }
-async function loadResidents(){
-
-const { getDocs, collection } = await import(
-"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js"
-);
-
-const querySnapshot = await getDocs(collection(window.db,"residents"));
-
-residents = [];
-
-querySnapshot.forEach((doc)=>{
-
-residents.push({
-id: doc.id,
-...doc.data()
-});
-
-});
-
-renderResidents();
-updateCounts();
-
-}
-
-function logoutResident(){
-
-localStorage.removeItem("residentBarangay");
-
-document.getElementById("residentDashboard").classList.add("hidden");
-document.getElementById("landingPage").classList.remove("hidden");
-
-}
-// Initialize
-        updateCounts();
-
-const savedBarangay = localStorage.getItem("residentBarangay");
-
-if(savedBarangay){
-
-document.getElementById("landingPage").classList.add("hidden");
-document.getElementById("residentDashboard").classList.remove("hidden");
-
-loadResidentAnnouncements();
-
-}
-
-async function postAnnouncement(){
-
-const title = document.getElementById("annTitle").value;
-const message = document.getElementById("annMessage").value;
-const barangay = document.getElementById("annBarangay").value;
-
-if(!title || !message){
-alert("Please fill the title and message");
-return;
-}
-
-const { addDoc, collection } = await import(
-"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js"
-);
-
-await addDoc(collection(window.db,"announcements"),{
-title:title,
-message:message,
-barangay:barangay,
-date:new Date().toLocaleString()
-});
-
-alert("Announcement posted successfully!");
-
-document.getElementById("annTitle").value="";
-document.getElementById("annMessage").value="";
-document.getElementById("annBarangay").value="";
-
-}
-
-function sendEmergency(){
-
-const message =
-"🚨 HEALTH ALERT: Please check with your barangay health center immediately.";
-
-for(const r of residents){
-sendRealSMS(r.phone,message);
-}
-
-alert("Emergency SMS alert sent!");
-
-}
-
-async function loadResidentAnnouncements(){
-
-const barangay = localStorage.getItem("residentBarangay");
-
-document.getElementById("residentBarangayLabel").textContent = barangay;
-
-const { getDocs, collection } = await import(
-"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js"
-);
-
-const snapshot = await getDocs(collection(window.db,"announcements"));
-
-const container = document.getElementById("residentAnnouncements");
-
-container.innerHTML="";
-
-snapshot.forEach(doc=>{
-
-const data = doc.data();
-
-if(data.barangay === "" || data.barangay === barangay){
-
-container.innerHTML += `
-<div class="bg-blue-50 border-l-4 border-blue-600 p-4 rounded shadow">
-
-<h4 class="font-bold text-blue-800">${data.title}</h4>
-
-<p class="text-gray-700 mt-1">${data.message}</p>
-
-<p class="text-xs text-gray-500 mt-2">${data.date}</p>
-
-</div>
-`;
-
-}
-
-});
-
-}
-function loadResidentPrograms(){
-
-const barangay = localStorage.getItem("residentBarangay");
-
-const container = document.getElementById("residentPrograms");
-
-container.innerHTML="";
-
-schedules.forEach(s=>{
-
-if(s.barangay === barangay){
-
-container.innerHTML += `
-<div class="bg-white rounded-lg shadow p-4 border-l-4 border-green-600">
-
-<h4 class="font-bold">${s.title}</h4>
-
-<p class="text-sm text-gray-600">📍 ${s.location}</p>
-
-<p class="text-sm text-gray-600">📅 ${s.date} | ${s.time}</p>
-
-<div class="w-full bg-gray-200 rounded h-2 mt-2">
-
-<div class="bg-green-600 h-2 rounded"
-style="width:${(s.slotsUsed/s.slots)*100}%"></div>
-
 </div>
 
-</div>
-`;
 
-}
+<!-- ═══════════════════════════════════════════════
+     SCRIPTS
+════════════════════════════════════════════════ -->
+<script src="script.js"></script>
 
-});
-
-}
-function loadSupplies(){
-
-const container = document.getElementById("residentSupplies");
-
-container.innerHTML="";
-
-supplies.forEach(s=>{
-
-container.innerHTML += `
-<div class="flex justify-between border-b py-2">
-
-<span>${s.name}</span>
-
-<span class="font-semibold text-green-600">${s.stock}</span>
-
-</div>
-`;
-
-});
-
-}
-function logoutResident(){
-
-localStorage.removeItem("residentBarangay");
-
-document.getElementById("residentDashboard").classList.add("hidden");
-document.getElementById("landingPage").classList.remove("hidden");
-
-}
-
-async function loginResident(){
-
-const phone = document.getElementById("loginResidentPhone").value;
-const password = document.getElementById("loginResidentPassword").value;
-
-if(!phone){
-alert("Enter your phone number");
-return;
-}
-
-const { getDocs, collection } = await import(
-"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js"
-);
-
-const snapshot = await getDocs(collection(window.db,"residents"));
-
-let found = false;
-
-snapshot.forEach(doc=>{
-
-const data = doc.data();
-
-if(data.phone === phone && data.password === password){
-
-found = true;
-
-localStorage.setItem("residentBarangay", data.barangay);
-
-document.getElementById("residentLogin").classList.add("hidden");
-document.getElementById("residentDashboard").classList.remove("hidden");
-
-loadResidentAnnouncements();
-loadResidentPrograms();
-loadResidentNotifications();
-loadSupplies();
-
-}
-
-});
-
-if(!found){
-alert("Phone number not registered");
-}
-
-}
-function loadResidentNotifications(){
-
-const barangay = localStorage.getItem("residentBarangay");
-
-const container = document.getElementById("residentNotifications");
-
-container.innerHTML="";
-
-notifications.forEach(n=>{
-
-if(n.barangay === barangay || n.barangay === "All Barangays"){
-
-container.innerHTML += `
-<div class="border-l-4 border-green-500 pl-4 py-2 bg-green-50 rounded">
-
-<p class="font-semibold">${n.message}</p>
-
-<p class="text-sm text-gray-600">
-📍 ${n.barangay} • ${n.sent}
-</p>
-
-</div>
-`;
-
-}
-
-});
-
-}
-</script>
 <script type="module">
+    import { initializeApp }  from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getFirestore }   from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    const firebaseConfig = {
+        apiKey:            "AIzaSyArw3-B2HZJVcHssiBuq8fAMLZ1pGr7Q5g",
+        authDomain:        "platform-alaga.firebaseapp.com",
+        projectId:         "platform-alaga",
+        storageBucket:     "platform-alaga.firebasestorage.app",
+        messagingSenderId: "28967773895",
+        appId:             "1:28967773895:web:737391f36a70bf448640e2",
+        measurementId:     "G-GKQQ2SK4HL"
+    };
 
-const firebaseConfig = {
-  apiKey: "AIzaSyArw3-B2HZJVcHssiBuq8fAMLZ1pGr7Q5g",
-  authDomain: "platform-alaga.firebaseapp.com",
-  projectId: "platform-alaga",
-  storageBucket: "platform-alaga.firebasestorage.app",
-  messagingSenderId: "28967773895",
-  appId: "1:28967773895:web:737391f36a70bf448640e2",
-  measurementId: "G-GKQQ2SK4HL"
-};
+    const app = initializeApp(firebaseConfig);
+    const db  = getFirestore(app);
+    window.db = db;
+</script>
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-window.db = db;
-
-    </script>
 </body>
 </html>
