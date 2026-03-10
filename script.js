@@ -5,8 +5,9 @@
 
 /* ---------------- CONSTANTS ---------------- */
 
-const SMS_API_KEY = "1697|2hlOHLNmvN7dFRrAynP2pIlzddhrrYbGqJ9M986L1e6978ed";
-const DEMO_OTP    = "123456";
+// ⬇ Paste your Render.com URL here after deploying the sms-proxy server
+const SMS_PROXY_URL = "https://alaga-sms-proxy.onrender.com/send-sms";
+const DEMO_OTP = "123456";
 
 const SMS_TEMPLATES = {
   vaccination: "ALAGA ALERT: Free COVID-19 vaccination on [DATE] at [LOCATION]. Bring valid ID. Slots limited. For info: 0917-XXX-XXXX",
@@ -101,11 +102,6 @@ function showPage(id) {
 async function fsImport() {
   const mod = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js");
   return mod;
-}
-
-async function dbCollection(name) {
-  const { collection } = await fsImport();
-  return collection(window.db, name);
 }
 
 /* ============================================================
@@ -745,30 +741,24 @@ async function postAnnouncement() {
    ============================================================ */
 
 async function sendRealSMS(phone, message) {
-  // Normalize phone: convert 09XX to +639XX for international format
-  const normalized = phone.replace(/^0/, "+63");
-
   try {
-    const response = await fetch("https://dashboard.philsms.com/api/v3/sms/send", {
+    const response = await fetch(SMS_PROXY_URL, {
       method:  "POST",
-      headers: {
-        "Content-Type":  "application/json",
-        "Authorization": "Bearer " + SMS_API_KEY
-      },
-      body: JSON.stringify({
-        recipient:  normalized,
-        sender_id:  "PhilSMS",
-        type:       "plain",
-        message:    message
-      })
+      headers: { "Content-Type": "application/json" },
+      body:    JSON.stringify({ phone, message })
     });
 
     const data = await response.json();
     console.log("SMS Response [" + phone + "]:", data);
+
+    if (!data.success) {
+      console.warn("SMS not delivered to " + phone + ":", data.message);
+    }
+
     return data;
 
   } catch (err) {
-    console.error("SMS send error [" + phone + "]:", err);
+    console.error("SMS error [" + phone + "]:", err.message || err);
     return null;
   }
 }

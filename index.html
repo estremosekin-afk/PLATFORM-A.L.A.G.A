@@ -848,7 +848,8 @@
 
     const app = initializeApp(firebaseConfig);
     const db  = getFirestore(app);
-    window.db = db;
+    window.db          = db;
+    window.firebaseApp = app;  // Exposed so script.js can init Firebase Functions
 </script>
 
 </body>
